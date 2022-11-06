@@ -1,0 +1,5 @@
+# Function dependencies, for example:
+# package>=version
+
+requests~=2.27.1
+python-dotenv~=0.21.0

@@ -3,6 +3,7 @@ Generate keywords of products in an image
 """
 
 import io
+from PIL import Image
 from google.cloud import vision
 
 
@@ -65,3 +66,5 @@ def detect_label(img: str):
 
     return label
 
+
+detect_text('blue')
