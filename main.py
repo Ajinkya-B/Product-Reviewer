@@ -1,6 +1,5 @@
+import base64
 import keywordcontroller
-
-# print(keywordcontroller.get_review('redb.jpeg'))
 
 
 def reviews(request):
@@ -14,12 +13,10 @@ def reviews(request):
     """
     data = request.get_json()
     try:
-        product_score = keywordcontroller.get_review(data['img_file'])
+        product_score = keywordcontroller.get_review(base64.b64decode(data['img']))
         return {"score": product_score}
     except Exception as e:
         return {
             'code': 'error',
             'message': str(e)
         }
-
-
