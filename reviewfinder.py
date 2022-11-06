@@ -8,14 +8,16 @@ import os
 
 load_dotenv()
 
+YOUR_URL = os.getenv('REVIEW_API_URL')
+YOUR_HOST = os.getenv('REVIEW_API_HOST')
 YOUR_KEY = os.getenv('REVIEW_API_KEY')
 
 
 def get_products(keyword: str):
-    url = "https://axesso-axesso-amazon-data-service-v1.p.rapidapi.com/amz/amazon-search-by-keyword-asin"
+    url = YOUR_URL
     headers = {
         "X-RapidAPI-Key": YOUR_KEY,
-        "X-RapidAPI-Host": "axesso-axesso-amazon-data-service-v1.p.rapidapi.com"
+        "X-RapidAPI-Host": YOUR_HOST
     }
     querystring = {"domainCode": "ca", "keyword": keyword, "page": "1", "excludeSponsored": "false",
                    "sortBy": "relevanceblender"}

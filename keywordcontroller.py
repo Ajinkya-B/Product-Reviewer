@@ -32,7 +32,7 @@ def get_product_info(text_list, logo_list, label_info):
         return ' '.join(text_list[:5])
 
 
-def get_review(image: str):
+def get_review(image):
     text_info = generatekeyword.detect_text(image)
     logo_info = generatekeyword.detect_logo(image)
     label_info = generatekeyword.detect_label(image)

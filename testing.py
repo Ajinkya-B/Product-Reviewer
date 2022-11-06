@@ -1,7 +1,3 @@
-import base64
-import keywordcontroller
-
-
 def reviews(request):
     """Responds to any HTTP request.
     Args:
@@ -11,12 +7,10 @@ def reviews(request):
         Response object using
         `make_response <http://flask.pocoo.org/docs/1.0/api/#flask.Flask.make_response>`.
     """
-    data = request.get_json()
-    try:
-        product_score = keywordcontroller.get_review(base64.b64decode(data['img']))
-        return {"score": product_score}
-    except Exception as e:
-        return {
-            'code': 'error',
-            'message': str(e)
-        }
+    request_json = request.get_json()
+    if request.args and 'message' in request.args:
+        return request.args.get('message')
+    elif request_json and 'message' in request_json:
+        return request_json['message']
+    else:
+        return 'Hello World!'

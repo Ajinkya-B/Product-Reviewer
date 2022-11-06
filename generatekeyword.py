@@ -2,16 +2,11 @@
 Generate keywords of products in an image
 """
 
-import io
 from google.cloud import vision
 
 
-def detect_text(img: str):
+def detect_text(content):
     client = vision.ImageAnnotatorClient()
-
-    with io.open(img, 'rb') as image_file:
-        content = image_file.read()
-
     image = vision.Image(content=content)
 
     response = client.text_detection(image=image)
@@ -26,12 +21,8 @@ def detect_text(img: str):
     return texts
 
 
-def detect_logo(img: str):
+def detect_logo(content):
     client = vision.ImageAnnotatorClient()
-
-    with io.open(img, 'rb') as image_file:
-        content = image_file.read()
-
     image = vision.Image(content=content)
 
     response = client.logo_detection(image=image)
@@ -46,12 +37,8 @@ def detect_logo(img: str):
     return logo
 
 
-def detect_label(img: str):
+def detect_label(content):
     client = vision.ImageAnnotatorClient()
-
-    with io.open(img, 'rb') as image_file:
-        content = image_file.read()
-
     image = vision.Image(content=content)
 
     response = client.label_detection(image=image)
@@ -64,4 +51,3 @@ def detect_label(img: str):
                 response.error.message))
 
     return label
-
