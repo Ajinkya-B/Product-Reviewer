@@ -3,7 +3,12 @@ import math
 
 import requests
 
-YOUR_KEY = ''
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+YOUR_KEY = os.getenv('REVIEW_API_KEY')
 
 
 def get_products(keyword: str):
@@ -66,10 +71,16 @@ def get_best_description(product_descriptions: list, text_descriptions: list) ->
     return curr_min[0]
 
 
-def get_rating(products, descriptions) -> float:
+def get_rating(products, descriptions):
     best_desc_list = list(detail['productDescription'] for detail in products['searchProductDetails'])
     best_description = get_best_description(best_desc_list, descriptions)
     str_rating = products['searchProductDetails'][best_description]['productRating']
 
-    return float(str_rating[:2])
+    final_str = ''
+    for char in str_rating:
+        if char == ' ':
+            break
+        final_str += char
+
+    return float(final_str)
 
